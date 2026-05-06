@@ -1,0 +1,100 @@
+{
+    "nombre": "modelo_rostro",
+    "clases": [
+        "rostro__diamond",
+        "rostro__long",
+        "rostro__oval",
+        "rostro__rectangle",
+        "rostro__rectangular",
+        "rostro__round",
+        "rostro__square",
+        "rostro__triangle"
+    ],
+    "class_to_idx": {
+        "rostro__diamond": 0,
+        "rostro__long": 1,
+        "rostro__oval": 2,
+        "rostro__rectangle": 3,
+        "rostro__rectangular": 4,
+        "rostro__round": 5,
+        "rostro__square": 6,
+        "rostro__triangle": 7
+    },
+    "img_size": 224,
+    "batch_size": 16,
+    "grad_accum": 2,
+    "historial": [
+        {
+            "epoch": 1,
+            "fase": "fase1",
+            "train_loss": 1.9108,
+            "train_acc": 0.2833,
+            "val_loss": 1.834,
+            "val_acc": 0.3538,
+            "min": 0.0
+        },
+        {
+            "epoch": 2,
+            "fase": "fase1",
+            "train_loss": 1.597,
+            "train_acc": 0.4904,
+            "val_loss": 1.6795,
+            "val_acc": 0.434,
+            "min": 10.6
+        },
+        {
+            "epoch": 3,
+            "fase": "fase1",
+            "train_loss": 1.4132,
+            "train_acc": 0.5976,
+            "val_loss": 1.5688,
+            "val_acc": 0.4835,
+            "min": 21.1
+        },
+        {
+            "epoch": 4,
+            "fase": "fase1",
+            "train_loss": 1.2713,
+            "train_acc": 0.6497,
+            "val_loss": 1.5367,
+            "val_acc": 0.4976,
+            "min": 29.9
+        },
+        {
+            "epoch": 5,
+            "fase": "fase2",
+            "train_loss": 1.2315,
+            "train_acc": 0.6658,
+            "val_loss": 1.4763,
+            "val_acc": 0.5189,
+            "min": 36.6
+        },
+        {
+            "epoch": 6,
+            "fase": "fase2",
+            "train_loss": 1.1418,
+            "train_acc": 0.7179,
+            "val_loss": 1.445,
+            "val_acc": 0.5354,
+            "min": 46.0
+        },
+        {
+            "epoch": 7,
+            "fase": "fase2",
+            "train_loss": 1.0827,
+            "train_acc": 0.739,
+            "val_loss": 1.417,
+            "val_acc": 0.5566,
+            "min": 55.0
+        },
+        {
+            "epoch": 8,
+            "fase": "fase2",
+            "train_loss": 1.0704,
+            "train_acc": 0.7458,
+            "val_loss": 1.3973,
+            "val_acc": 0.5472,
+            "min": 64.2
+        }
+    ]
+}

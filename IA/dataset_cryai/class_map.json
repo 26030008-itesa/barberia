@@ -1,0 +1,19 @@
+{
+    "cabello__curly": 0,
+    "cabello__fine": 1,
+    "cabello__medium": 2,
+    "cabello__normal": 3,
+    "cabello__short": 4,
+    "cabello__straight": 5,
+    "cabello__texture": 6,
+    "cabello__thick": 7,
+    "cabello__wavy": 8,
+    "rostro__diamond_face_shape": 9,
+    "rostro__long": 10,
+    "rostro__long_face_shape": 11,
+    "rostro__oval_face_shape": 12,
+    "rostro__rectangle_face_shape": 13,
+    "rostro__round_face_shape": 14,
+    "rostro__square_face_shape": 15,
+    "rostro__triangle_face_shape": 16
+}

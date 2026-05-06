@@ -1,0 +1,79 @@
+{
+    "nombre": "modelo_cabello",
+    "clases": [
+        "cabello__curly",
+        "cabello__dreadlocks",
+        "cabello__fine",
+        "cabello__kinky",
+        "cabello__medium",
+        "cabello__normal",
+        "cabello__short",
+        "cabello__straight",
+        "cabello__texture",
+        "cabello__thick",
+        "cabello__wavy"
+    ],
+    "class_to_idx": {
+        "cabello__curly": 0,
+        "cabello__dreadlocks": 1,
+        "cabello__fine": 2,
+        "cabello__kinky": 3,
+        "cabello__medium": 4,
+        "cabello__normal": 5,
+        "cabello__short": 6,
+        "cabello__straight": 7,
+        "cabello__texture": 8,
+        "cabello__thick": 9,
+        "cabello__wavy": 10
+    },
+    "img_size": 224,
+    "batch_size": 16,
+    "grad_accum": 2,
+    "historial": [
+        {
+            "epoch": 1,
+            "fase": "fase1",
+            "train_loss": 2.0389,
+            "train_acc": 0.317,
+            "val_loss": 1.5803,
+            "val_acc": 0.5187,
+            "min": 0.0
+        },
+        {
+            "epoch": 2,
+            "fase": "fase1",
+            "train_loss": 1.6367,
+            "train_acc": 0.5034,
+            "val_loss": 1.4942,
+            "val_acc": 0.5546,
+            "min": 10.4
+        },
+        {
+            "epoch": 3,
+            "fase": "fase1",
+            "train_loss": 1.5314,
+            "train_acc": 0.5462,
+            "val_loss": 1.4398,
+            "val_acc": 0.5892,
+            "min": 20.9
+        },
+        {
+            "epoch": 4,
+            "fase": "fase2",
+            "train_loss": 1.4769,
+            "train_acc": 0.566,
+            "val_loss": 1.4526,
+            "val_acc": 0.5851,
+            "min": 31.1
+        },
+        {
+            "epoch": 5,
+            "fase": "fase2",
+            "train_loss": 1.4327,
+            "train_acc": 0.5947,
+            "val_loss": 1.4313,
+            "val_acc": 0.5837,
+            "min": 46.1
+        }
+    ]
+}

@@ -4,11 +4,11 @@
 ║                                                                  ║
 ║  Endpoint principal:                                             ║
 ║    POST /analizar                                                ║
-║      Body: multipart/form-data con campo "foto" (imagen)         ║
+║      Body: JSON con campo "imagen" en formato Base64             ║
 ║      Response: JSON con rostro, cabello y recomendaciones        ║
 ║                                                                  ║
 ║  Instalación:                                                    ║
-║    pip install fastapi uvicorn python-multipart pillow           ║
+║    pip install fastapi uvicorn python-multipart pillow pydantic  ║
 ║    pip install torch torchvision                                 ║
 ║                                                                  ║
 ║  Uso:                                                            ║
@@ -23,7 +23,9 @@ import random
 import torch
 import torch.nn as nn
 import uvicorn
-from fastapi import FastAPI, File, UploadFile, HTTPException
+import base64  # <-- AÑADIDO: Para decodificar la imagen de JavaScript
+from pydantic import BaseModel # <-- AÑADIDO: Para recibir el JSON correctamente
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from torchvision import models, transforms
@@ -41,7 +43,6 @@ CRYAI_JSON  = BASE_DIR / "dataset_cryai" / "dataset_limpio.json"
 
 DEVICE      = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 IMG_SIZE    = 224
-MAX_FILE_MB = 5
 
 # ─────────────────────────────────────────────────────────────
 # TEXTOS LEGIBLES PARA LA UI DE LA BARBERÍA
@@ -249,8 +250,11 @@ def buscar_recomendaciones(clase_rostro: str, clases_cabello: list, max_r: int =
     return salida
 
 # ─────────────────────────────────────────────────────────────
-# FASTAPI APP
+# MODELO PYDANTIC Y FASTAPI APP
 # ─────────────────────────────────────────────────────────────
+
+class PeticionImagen(BaseModel):
+    imagen: str
 
 app = FastAPI(
     title="CRYAI API",
@@ -290,33 +294,25 @@ def health():
 
 
 @app.post("/analizar")
-async def analizar(foto: UploadFile = File(...)):
+async def analizar(peticion: PeticionImagen):
     """
-    Analiza una fotografía y devuelve:
+    Analiza una fotografía enviada en Base64 y devuelve:
     - Forma de rostro detectada (top 3 con confianza)
     - Tipo de cabello detectado (top 3 con confianza)
     - Consejo personalizado
     - Hasta 6 cortes recomendados del dataset
     """
-    # ── Validar archivo ──────────────────────────────────────
-    if foto.content_type not in ["image/jpeg", "image/png", "image/webp"]:
-        raise HTTPException(
-            status_code=400,
-            detail="Formato no soportado. Usa JPG, PNG o WEBP."
-        )
-
-    contenido = await foto.read()
-
-    if len(contenido) > MAX_FILE_MB * 1024 * 1024:
-        raise HTTPException(
-            status_code=413,
-            detail=f"Imagen demasiado grande. Máximo {MAX_FILE_MB}MB."
-        )
-
     try:
+        # Extraer el texto Base64 limpiando el encabezado de JavaScript si lo trae
+        base64_data = peticion.imagen
+        if "," in base64_data:
+            base64_data = base64_data.split(",")[1]
+            
+        # Decodificar y convertir a imagen
+        contenido = base64.b64decode(base64_data)
         imagen = Image.open(BytesIO(contenido)).convert("RGB")
-    except Exception:
-        raise HTTPException(status_code=400, detail="No se pudo leer la imagen.")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"No se pudo leer la imagen Base64: {str(e)}")
 
     # ── Inferencia de Rostro ─────────────────────────────────
     if MODELO_ROSTRO and META_ROSTRO:

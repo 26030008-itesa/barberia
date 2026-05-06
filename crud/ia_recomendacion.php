@@ -288,7 +288,7 @@ try {
 
 <script>
 // ── Config ──────────────────────────────────────────────────
-const API_URL = 'http://localhost:8000/analizar';
+const API_URL = 'http://192.168.137.224:8000/analizar'; //Cambiar a localhost cuando se hagan peticiones en la misma maquina cuandi se quiera hacer que otros usarios accedan cambiar a la ip
 let archivoActual = null;
 
 // ── Selección de archivo ─────────────────────────────────────
